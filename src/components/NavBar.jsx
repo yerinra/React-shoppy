@@ -8,16 +8,11 @@ import {
 import { SiAwesomelists } from "react-icons/si";
 import { Link } from "react-router-dom";
 import User from "./User";
+import { useAuthContext } from "../context/AuthContext";
+import Button from "./ui/Button";
 
 const NavBar = () => {
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    onUserStateChange((user) => {
-      console.log(user);
-      setUser(user);
-    });
-  }, []);
+  const { user, logIn, logOut } = useAuthContext();
 
   return (
     <section className="flex items-center bg-white justify-center pt-20">
@@ -38,23 +33,15 @@ const NavBar = () => {
             <div>Cart</div>
           </Link>
         )}
-        {user && (
+        {user && user.isAdmin && (
           <Link to="/products/new" className="flex mr-5">
             <AiOutlineEdit className="mr-1.5" />
             <div>New</div>
           </Link>
         )}
         {user && <User user={user} />}
-        {!user && (
-          <button className="bg-white px-3 p-1 loginBtn" onClick={logIn}>
-            LogIn
-          </button>
-        )}
-        {user && (
-          <button className="bg-white px-3 p-1 loginBtn" onClick={logOut}>
-            LogOut
-          </button>
-        )}
+        {!user && <Button onClick={logIn}>Login</Button>}
+        {user && <Button onClick={logOut}>Logout</Button>}
       </section>
     </section>
   );

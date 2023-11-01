@@ -6,7 +6,7 @@ export default {
       colors: {
         shoppyBlack: "#001524",
         shoppyGray: "#9E9FA5",
-        shoppyAccent: "#F11A7B",
+        shoppyAccent: "#51cbe0",
       },
     },
   },
