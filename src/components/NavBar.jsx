@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { logIn, logOut, onUserStateChange } from "../api/firebase";
 import {
   AiOutlineShop,
   AiOutlineShoppingCart,
@@ -10,6 +8,7 @@ import { Link } from "react-router-dom";
 import User from "./User";
 import { useAuthContext } from "../context/AuthContext";
 import Button from "./ui/Button";
+import CartNumber from "./CartNumber";
 
 const NavBar = () => {
   const { user, logIn, logOut } = useAuthContext();
@@ -24,18 +23,19 @@ const NavBar = () => {
       </section>
       <section className="navs flex items-center justify-center mx-auto font-sans text-gray-900 text-bold">
         <Link to="/products" className="flex mr-5">
-          <SiAwesomelists className="mr-2" />
+          <SiAwesomelists className="mr-2 text-xl" />
           <div>Products</div>
         </Link>
         {user && (
-          <Link to="/cart" className="flex mr-5">
-            <AiOutlineShoppingCart className="mr-2" />
+          <Link to="/cart" className="flex mr-5 relative">
+            <AiOutlineShoppingCart className="mr-2 text-xl" />
             <div>Cart</div>
+            <CartNumber />
           </Link>
         )}
         {user && user.isAdmin && (
           <Link to="/products/new" className="flex mr-5">
-            <AiOutlineEdit className="mr-1.5" />
+            <AiOutlineEdit className="mr-1.5 text-xl" />
             <div>New</div>
           </Link>
         )}

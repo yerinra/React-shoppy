@@ -1,9 +1,6 @@
-import shoppyBannerImg from "../../public/assets/shoppyBanner.jpeg";
-import Button from "../components/ui/Button";
-
 const Banner = () => {
   return (
-    <header className="relative overflow-hidden flex flex-col justify-center items-center bg-slate-900 mt-8">
+    <header className="relative overflow-hidden flex flex-col justify-center items-center bg-slate-900 mt-8 w-full">
       <img
         src="../assets/shoppyBanner.jpeg"
         className="w-full h-80 object-cover opacity-60 "

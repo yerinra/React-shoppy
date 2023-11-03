@@ -1,5 +1,3 @@
-const url = "https://api.cloudinary.com/v1_1/hzxyensd5/image/upload";
-
 export async function uploadImage(file) {
   const data = new FormData();
   data.append("file", file);

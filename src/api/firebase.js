@@ -6,8 +6,9 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getDatabase, ref, set, get } from "firebase/database";
+import { getDatabase, ref, set, get, remove } from "firebase/database";
 import { v4 as uuid } from "uuid";
+import { useAuthContext } from "../context/AuthContext";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -20,6 +21,8 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const database = getDatabase(app);
+
+// const { user } = useAuthContext();
 
 export function logIn() {
   signInWithPopup(auth, provider).catch(console.error);
@@ -59,6 +62,14 @@ export async function addNewProduct(product, imageUrl) {
   });
 }
 
+export async function getCart(userId) {
+  return get(ref(database, `cart/${userId}`)) //
+    .then((snapshot) => {
+      const items = snapshot.val() || {};
+      return Object.values(items);
+    });
+}
+
 export async function getProducts() {
   return get(ref(database, "products")) //
     .then((snapshot) => {
@@ -68,4 +79,17 @@ export async function getProducts() {
         return [];
       }
     });
+}
+
+export async function addOrUpdateCartItem(userId, product) {
+  // if (!user) return;
+  return set(ref(database, `cart/${userId}/${product.id}`), product);
+}
+
+export async function removeCartItem(userId, productId) {
+  return remove(ref(database, `cart/${userId}/${productId}`));
+}
+
+export async function pay(userId) {
+  return remove(ref(database, `cart/${userId}`));
 }

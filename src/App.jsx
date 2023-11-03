@@ -38,7 +38,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             ></Route>
-            <Route path="/producs/:id" element={<ProductDetail />}></Route>
+            <Route path="/products/:id" element={<ProductDetail />}></Route>
             <Route path="*" element={<ErrorPage />}></Route>
           </Routes>
         </Router>

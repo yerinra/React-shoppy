@@ -13,8 +13,16 @@ const Products = () => {
   });
   return (
     <>
-      {isLoading && <p>Loading...Please Wait...</p>}
-      {error && <p>Error!</p>}
+      {isLoading && (
+        <p className="flex justify-center text-shoppyBlack font-sans mt-5">
+          Loading...Please Wait...
+        </p>
+      )}
+      {error && (
+        <p className="flex justify-center text-shoppyBlack font-sans mt-5">
+          Error!
+        </p>
+      )}
       <ul className="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-10 pb-10 w-4/5 mx-auto">
         {products &&
           products.map((product) => (
